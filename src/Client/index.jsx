@@ -21,7 +21,7 @@ function FrontPage() {
 function Application(){
     return <BrowserRouter>
         <header>
-            <Link to="/"> Front Page hello header</Link>
+            <Link to="/"> Front Page!!!</Link>
         </header>
         <Switch>
             <Route path="/profile">
