@@ -6,9 +6,9 @@ export function ErrorView({ error }) {
     return (
       <div>
         You are not logged in.{" "}
-        <Link to={"/login"}>
+        <a href={"/api/login"} target={"_self"}>
           <button>Login</button>
-        </Link>
+        </a>
       </div>
     );
   }
