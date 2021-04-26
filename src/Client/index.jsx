@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {BrowserRouter, Link} from "react-router-dom";
-import {Route} from "react-router";
+import {Route, Switch} from "react-router";
 import {ProfilePage} from "./profilePage";
 
 function LoginPage() {
@@ -12,7 +12,7 @@ function FrontPage() {
     return <div>
         <h1>Welcome</h1>
         <ul>
-            <li><Link to="/Profile"> Profile </Link></li>
+            <li><Link to="/profile"> Profile </Link></li>
             <li><Link to="/login"> Login </Link></li>
         </ul>
     </div>
@@ -21,9 +21,9 @@ function FrontPage() {
 function Application(){
     return <BrowserRouter>
         <header>
-            <Link to="/"> Front Page</Link>
+            <Link to="/"> Front Page hello header</Link>
         </header>
-        <switch>
+        <Switch>
             <Route path="/profile">
                 <ProfilePage />
             </Route>
@@ -36,7 +36,7 @@ function Application(){
             <Route>
                 <h1>404 Not Found</h1>
             </Route>
-        </switch>
+        </Switch>
 
     </BrowserRouter>
 }
