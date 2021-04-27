@@ -5,9 +5,9 @@ const path = require("path");
 const app = express();
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-const passport = require("passport");
+const router = require("./googleAuth");
+const ws = require("ws");
 
-//Refactor server code
 app.use(
   session({
     secret: "Ma864@43''as",
@@ -17,9 +17,6 @@ app.use(
 );
 app.use(BodyParser.json());
 app.use(cookieParser());
-
-const router = require("./googleAuth");
-
 app.use(router);
 
 app.get("/api/profile", (req, res) => {
@@ -27,6 +24,7 @@ app.get("/api/profile", (req, res) => {
     return res.status(401).send();
   }
   const { username, email } = req.user;
+  userName = req.user.username;
   res.json({ username, email });
 });
 
@@ -39,6 +37,25 @@ app.use((req, res, next) => {
   }
 });
 
+//WS
+
+const wsServer = new ws.Server({ noServer: true });
+const sockets = [];
+wsServer.on("connection", (socket) => {
+  sockets.push(socket);
+  console.log("client connected", socket);
+  socket.on("message", (message) => {
+    for (const socket of sockets) {
+      socket.send(message);
+    }
+  });
+});
+
 const server = app.listen(3000, () => {
   console.log(`server started on http://localhost:${server.address().port}`);
+  server.on("upgrade", (req, res, head) => {
+    wsServer.handleUpgrade(req, res, head, (socket) => {
+      wsServer.emit("connection", socket, req);
+    });
+  });
 });
