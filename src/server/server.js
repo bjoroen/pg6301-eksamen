@@ -9,6 +9,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require("passport-google-oauth20");
 
+//Refactor server code
 app.use(
   session({
     secret: "Ma864@43''as",
