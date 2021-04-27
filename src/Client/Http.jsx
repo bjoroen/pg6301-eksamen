@@ -17,9 +17,9 @@ export async function fetchJson(url) {
   return await res.json();
 }
 
-export async function postJson(url, json) {
+export async function crudJson(url, method, json) {
   await fetch(url, {
-    method: "POST",
+    method: method,
     body: JSON.stringify(json),
     headers: {
       "Content-Type": "application/json",

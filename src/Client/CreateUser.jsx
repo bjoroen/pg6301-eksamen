@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { InputField } from "./InputField";
 import { useSubmit } from "./Hooks/UseSubmit";
-import { postJson } from "./Http";
+import { crudJson } from "./Http";
 import { Link } from "react-router-dom";
 
 export function CreateUser() {
@@ -11,7 +11,7 @@ export function CreateUser() {
 
   const { handleSubmit: handleCreating, submitting, error } = useSubmit(
     async () => {
-      await postJson("/api/login", { username, password, email });
+      await crudJson("/api/login", "POST", { username, password, email });
     },
     () => {
       setUsername("");

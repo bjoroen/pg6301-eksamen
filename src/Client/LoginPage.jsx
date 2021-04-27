@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { InputField } from "./InputField";
-import { postJson } from "./Http";
+import { crudJson } from "./Http";
 import { useHistory } from "react-router";
 import { useSubmit } from "./Hooks/UseSubmit";
 
@@ -11,7 +11,7 @@ export function LoginPage() {
 
   const { handleSubmit: handleLogin, submitting, error } = useSubmit(
     async () => {
-      await postJson("/api/login", { username, password });
+      await crudJson("/api/login", "POST", { username, password });
     },
     () => history.push("/")
   );

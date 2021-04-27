@@ -16,7 +16,6 @@ app.use(
     saveUninitialized: false,
   })
 );
-
 app.use(BodyParser.json());
 app.use(cookieParser());
 app.use(routerGoogle);

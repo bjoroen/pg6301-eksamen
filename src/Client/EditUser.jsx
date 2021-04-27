@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import { useLoading } from "./Hooks/UseLoading";
-import { fetchJson, putJson } from "./Http";
+import { crudJson, fetchJson, putJson } from "./Http";
 import { ErrorView } from "./ErrorView";
 import { LoadingView } from "./LoadingView";
 import { InputField } from "./InputField";
@@ -21,7 +21,7 @@ export function EditUser() {
 
   const { handleSubmit: handlePut, submitting } = useSubmit(
     async () => {
-      await putJson(`/api/users/${id}`, { username, password, email });
+      await crudJson(`/api/users/${id}`, "PUT", { username, password, email });
     },
     () => history.push("/")
   );
