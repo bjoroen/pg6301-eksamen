@@ -1,0 +1,30 @@
+#frontPage{
+    display: flex;
+}
+#chat{
+    flex: 1;
+}
+#container-chat{
+    margin-right: 20em;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 80vh;
+}
+#container-chat header{
+    background-color: lightblue;
+}
+#container-chat main{
+    background-color: lightgray;
+}
+#container-chat footer form{
+    display: flex;
+    align-items: stretch;
+}
+#container-chat footer input{
+    flex: 1;
+}
+
+#profile{
+    padding-right: 20em;
+
+}
