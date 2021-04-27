@@ -4,23 +4,14 @@ import { fetchJson } from "./Http";
 import { LoadingView } from "./LoadingView";
 import { ErrorView } from "./ErrorView";
 
-export function ProfilePage() {
-  const { loading, error, data } = useLoading(() => fetchJson("/api/profile"));
-
-  if (error) {
-    return <ErrorView error={error} />;
-  }
-
-  if (loading || !data) {
-    return <LoadingView />;
-  }
-
-  const { username } = data;
+export function ProfilePage(props) {
+  //const { username } = props.username;
 
   return (
-    <div>
+    <div id="profile">
       <h1>Your Profile</h1>
-      <div>Username: {username}</div>
+      <div>{props.username}</div>
+      <div>{props.email}</div>
     </div>
   );
 }

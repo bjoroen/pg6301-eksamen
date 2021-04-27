@@ -38,7 +38,10 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       console.log(profile);
-      done(null, { username: profile.displayName });
+      done(null, {
+        username: profile.displayName,
+        email: profile.emails[0].value,
+      });
     }
   )
 );
@@ -48,7 +51,10 @@ passport.deserializeUser((id, done) => done(null, id));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/api/login", passport.authenticate("google", { scope: ["profile"] }));
+app.get(
+  "/api/login",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 app.get("/api/oauth2callback", passport.authenticate("google"), (req, res) => {
   res.redirect("/");
 });
@@ -57,8 +63,8 @@ app.get("/api/profile", (req, res) => {
   if (!req.user) {
     return res.status(401).send();
   }
-  const { username } = req.user;
-  res.json({ username });
+  const { username, email } = req.user;
+  res.json({ username, email });
 });
 
 app.post("/api/login", passport.authenticate("local"), (req, res) => {
