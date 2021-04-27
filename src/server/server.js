@@ -5,7 +5,8 @@ const path = require("path");
 const app = express();
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-const router = require("./googleAuth");
+const routerGoogle = require("./googleAuth");
+const routerCrud = require("./CRUDuser");
 const ws = require("ws");
 
 app.use(
@@ -15,16 +16,17 @@ app.use(
     saveUninitialized: false,
   })
 );
+
 app.use(BodyParser.json());
 app.use(cookieParser());
-app.use(router);
+app.use(routerGoogle);
+app.use(routerCrud);
 
 app.get("/api/profile", (req, res) => {
   if (!req.user) {
     return res.status(401).send();
   }
   const { username, email } = req.user;
-  userName = req.user.username;
   res.json({ username, email });
 });
 
@@ -43,7 +45,6 @@ const wsServer = new ws.Server({ noServer: true });
 const sockets = [];
 wsServer.on("connection", (socket) => {
   sockets.push(socket);
-  console.log("client connected", socket);
   socket.on("message", (message) => {
     for (const socket of sockets) {
       socket.send(message);

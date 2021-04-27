@@ -12,7 +12,6 @@ passport.use(
       callbackURL: "/api/oauth2callback",
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
       done(null, {
         username: profile.displayName,
         email: profile.emails[0].value,
@@ -26,11 +25,6 @@ passport.deserializeUser((id, done) => done(null, id));
 
 router.use(passport.initialize());
 router.use(passport.session());
-
-router.post("/api/login", passport.authenticate("local"), (req, res) => {
-  console.log("hello world");
-  res.end();
-});
 
 router.get(
   "/api/login",
