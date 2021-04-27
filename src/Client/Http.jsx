@@ -18,7 +18,7 @@ export async function fetchJson(url) {
 }
 
 export async function postJson(url, json) {
-  const res = await fetch(url, {
+  await fetch(url, {
     method: "POST",
     body: JSON.stringify(json),
     headers: {
@@ -28,7 +28,7 @@ export async function postJson(url, json) {
 }
 
 export async function putJson(url, json) {
-  const res = await fetch(url, {
+  await fetch(url, {
     method: "PUT",
     body: JSON.stringify(json),
     headers: {

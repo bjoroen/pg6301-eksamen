@@ -12,6 +12,11 @@ export function CreateUser() {
   const { handleSubmit: handleCreating, submitting, error } = useSubmit(
     async () => {
       await postJson("/api/login", { username, password, email });
+    },
+    () => {
+      setUsername("");
+      setEmail("");
+      setPassword("");
     }
   );
 
