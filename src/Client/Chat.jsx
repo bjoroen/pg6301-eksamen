@@ -1,12 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export function Chat() {
+export function Chat(props) {
   const [chatLog, setChatLog] = useState([]);
   const [msg, setMsg] = useState("");
+  const [socket, setSocket] = useState();
+
+  useEffect(() => {
+    const socket = new WebSocket("ws://" + window.location.host);
+    socket.open = (event) => {
+      console.log("open", event);
+    };
+
+    socket.onmessage = (event) => {
+      console.log("msg", event);
+      setChatLog((chatLog) => [...chatLog, event.data]);
+    };
+
+    socket.onclose = (event) => {
+      console.log("close", event);
+    };
+
+    setSocket(socket);
+  }, []);
 
   function handleSubmitMsg(e) {
     e.preventDefault();
-    setChatLog([...chatLog, msg]);
+    socket.send(props.username + ": " + " " + msg);
     setMsg("");
   }
 

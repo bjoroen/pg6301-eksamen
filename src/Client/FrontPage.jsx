@@ -23,7 +23,7 @@ export function FrontPage() {
   return (
     <div id="frontPage">
       <ProfilePage id="profile" username={username} email={email} />
-      <Chat id="chat" />
+      <Chat username={username} id="chat" />
     </div>
   );
 }
