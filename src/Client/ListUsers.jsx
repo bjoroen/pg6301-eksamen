@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useLoading } from "./useLoading";
+import { useLoading } from "./Hooks/UseLoading";
 import { fetchJson } from "./Http";
 import { LoadingView } from "./LoadingView";
 import { ErrorView } from "./ErrorView";
+import { Link } from "react-router-dom";
 
-export function ListOfUsers() {
+export function ListUsers() {
   const { loading, error, data } = useLoading(() => fetchJson("/api/users"));
-  const [users, setUsers] = useState([]);
 
   if (error) {
     return <ErrorView error={error} />;
@@ -16,10 +16,6 @@ export function ListOfUsers() {
     return <LoadingView />;
   }
 
-  useEffect(() => {
-    setUsers(data);
-  }, []);
-
   return (
     <>
       <h1>List users</h1>
@@ -28,6 +24,9 @@ export function ListOfUsers() {
           <h1>{username}</h1>
           <li>{email}</li>
           <li>{password}</li>
+          <Link to={`/edit?id=${id}`}>
+            <button>Edit this user</button>
+          </Link>
         </div>
       ))}
     </>

@@ -1,5 +1,5 @@
 import React from "react";
-import { AddNewUsers } from "./addNewUsers";
+import { CreateUser } from "./CreateUser";
 
 export function ProfilePage(props) {
   return (
@@ -7,7 +7,7 @@ export function ProfilePage(props) {
       <h1>Your Profile</h1>
       <div>{props.username}</div>
       <div>{props.email}</div>
-      <AddNewUsers />
+      <CreateUser />
     </div>
   );
 }

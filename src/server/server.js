@@ -6,7 +6,7 @@ const app = express();
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const routerGoogle = require("./googleAuth");
-const routerCrud = require("./CRUDuser");
+const routerCrud = require("./crudUser");
 const ws = require("ws");
 
 app.use(

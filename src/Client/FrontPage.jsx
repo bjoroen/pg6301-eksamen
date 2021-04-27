@@ -1,6 +1,6 @@
 import React from "react";
-import { ProfilePage } from "./profilePage";
-import { useLoading } from "./useLoading";
+import { ProfilePage } from "./ProfilePage";
+import { useLoading } from "./Hooks/UseLoading";
 import { fetchJson } from "./Http";
 import { ErrorView } from "./ErrorView";
 import { LoadingView } from "./LoadingView";

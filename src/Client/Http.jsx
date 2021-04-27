@@ -26,3 +26,13 @@ export async function postJson(url, json) {
     },
   });
 }
+
+export async function putJson(url, json) {
+  const res = await fetch(url, {
+    method: "PUT",
+    body: JSON.stringify(json),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}

@@ -1,25 +1,24 @@
 import React, { useState } from "react";
-import { InputField } from "./inputField";
+import { InputField } from "./InputField";
+import { useSubmit } from "./Hooks/UseSubmit";
 import { postJson } from "./Http";
-import { useHistory } from "react-router";
-import { useSubmit } from "./useSubmit";
+import { Link } from "react-router-dom";
 
-export function LoginPage() {
+export function CreateUser() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
+  const [email, setEmail] = useState("");
 
-  const { handleSubmit: handleLogin, submitting, error } = useSubmit(
+  const { handleSubmit: handleCreating, submitting, error } = useSubmit(
     async () => {
-      await postJson("/api/login", { username, password });
-    },
-    () => history.push("/")
+      await postJson("/api/login", { username, password, email });
+    }
   );
 
   return (
     <div>
-      <h1>Please log in</h1>
-      <form onSubmit={handleLogin}>
+      <h1>Create new user</h1>
+      <form onSubmit={handleCreating}>
         {submitting && <div>Please wait</div>}
         {error && <div>Error: {error.toString()}</div>}
         <InputField
@@ -32,8 +31,11 @@ export function LoginPage() {
           value={password}
           onValueChange={setPassword}
         />
-        <button disabled={submitting}>Log in</button>
+        <InputField label={"Email"} value={email} onValueChange={setEmail} />
+
+        <button disabled={submitting}>Create user</button>
       </form>
+      <Link to="users">See all users</Link>
     </div>
   );
 }

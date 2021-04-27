@@ -10,7 +10,7 @@ export function useSubmit(submitFunction, onSubmitSuccess) {
     setError(undefined);
     try {
       await submitFunction();
-      onSubmitSuccess;
+      onSubmitSuccess();
     } catch (e) {
       setError(e);
     } finally {
