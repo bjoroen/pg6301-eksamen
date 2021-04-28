@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import { useLoading } from "./Hooks/UseLoading";
-import { crudJson, fetchJson, putJson } from "./Http";
+import { crudJson, fetchJson } from "./Http";
 import { ErrorView } from "./ErrorView";
 import { LoadingView } from "./LoadingView";
 import { InputField } from "./InputField";
@@ -19,7 +19,7 @@ export function EditUser() {
     fetchJson(`/api/users/${id}`)
   );
 
-  const { handleSubmit: handlePut, submitting } = useSubmit(
+  const { handleSubmit: onSubmit, submitting } = useSubmit(
     async () => {
       await crudJson(`/api/users/${id}`, "PUT", { username, password, email });
     },
@@ -35,8 +35,8 @@ export function EditUser() {
   }
 
   return (
-    <form onSubmit={handlePut}>
-      <h1>Edit a user</h1>
+    <form onSubmit={onSubmit}>
+      <h1>Edit the user {data.username}</h1>
       <InputField label={"Name"} value={username} onValueChange={setUsername} />
       <InputField label={"Email"} value={email} onValueChange={setEmail} />
       <InputField

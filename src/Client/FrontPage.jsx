@@ -18,7 +18,6 @@ export function FrontPage() {
   }
 
   const { username, email } = data;
-  console.log(data);
 
   return (
     <div id="frontPage">

@@ -11,7 +11,7 @@ export function CreateUser() {
 
   const { handleSubmit: handleCreating, submitting, error } = useSubmit(
     async () => {
-      await crudJson("/api/login", "POST", { username, password, email });
+      await crudJson("/api/users", "POST", { username, password, email });
     },
     () => {
       setUsername("");
