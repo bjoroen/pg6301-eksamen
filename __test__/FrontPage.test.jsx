@@ -4,7 +4,7 @@ import React from "react";
 import { MemoryRouter } from "react-router";
 import { FrontPage } from "../src/Client/FrontPage";
 
-describe("should show error when api is down", () => {
+describe("Front page tests", () => {
   global.fetch = jest.fn();
 
   it("should show loading view ", () => {

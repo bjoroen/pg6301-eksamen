@@ -4,7 +4,7 @@ import { act } from "react-dom/test-utils";
 import { ProfilePage } from "../src/Client/ProfilePage";
 import { MemoryRouter } from "react-router";
 
-describe("Loading view", () => {
+describe("Profile page Test", () => {
   it("shows username and email on profile", () => {
     const container = document.createElement("div");
     document.body.appendChild(container);

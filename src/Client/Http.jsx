@@ -26,13 +26,3 @@ export async function crudJson(url, method, json) {
     },
   });
 }
-
-export async function putJson(url, json) {
-  await fetch(url, {
-    method: "PUT",
-    body: JSON.stringify(json),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-}

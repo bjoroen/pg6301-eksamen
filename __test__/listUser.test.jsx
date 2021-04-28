@@ -18,10 +18,6 @@ describe("List user tests", () => {
     })
   );
 
-  beforeEach(() => {
-    fetch.mockClear();
-  });
-
   it("should show error", async () => {
     fetch.mockImplementationOnce(() => Promise.reject("API is down"));
     const container = document.createElement("div");
@@ -39,10 +35,10 @@ describe("List user tests", () => {
     expect(container.querySelector("div").textContent).toContain(
       "An error has occurred:"
     );
-    expect(global.fetch).toHaveBeenCalledTimes(1);
   });
 
   it("should call fetch", () => {
     fetch.mockImplementationOnce(() => Promise.reject("API is down"));
+    expect(global.fetch).toHaveBeenCalledTimes(1);
   });
 });
